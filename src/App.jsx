@@ -1,3 +1,16 @@
+import "./App.css";
+import { CustomerList } from "./components/customers/CustomersList.jsx";
+import { TicketList } from "./components/tickets/TicketList.jsx";
+import { User } from "./users/User.jsx";
+
 export const App = () => {
-  return <div className="welcome">Welcome to your first React Application!</div>
-}
+  return (
+    <>
+      <TicketList />
+      <CustomerList />
+      <User />
+    </>
+  );
+};
+
+//
