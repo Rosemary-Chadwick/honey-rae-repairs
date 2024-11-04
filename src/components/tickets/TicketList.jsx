@@ -4,7 +4,7 @@ import "./Tickets.css";
 import { Ticket } from "./Ticket";
 import { TicketFilterBar } from "./TicketFilterBar";
 
-export const TicketList = () => {
+export const TicketList = ({ currentUser }) => {
   const [allTickets, setAllTickets] = useState([]);
   // a state variable that will act as a toggle for if we want to show if emergency or not
   const [showEmergencyOnly, setShowEmergencyOnly] = useState(false);
@@ -52,7 +52,9 @@ export const TicketList = () => {
         {filteredTickets.map((ticket) => {
           //instead of allTickets.map
           //the info here went to Ticket.jsx = <Ticket
-          return <Ticket ticket={ticket} key={ticket.id} />;
+          return (
+            <Ticket ticket={ticket} currentUser={currentUser} key={ticket.id} />
+          );
         })}
       </article>
     </div>

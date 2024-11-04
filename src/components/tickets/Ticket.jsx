@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { getAllEmployees } from "../../services/employeeService";
 import "./Tickets.css";
 
-export const Ticket = ({ ticket }) => {
+export const Ticket = ({ ticket, currentUser }) => {
   const [employees, setEmployees] = useState([]);
   const [assignedEmployee, setAssignedEmployee] = useState({});
 
@@ -14,11 +14,13 @@ export const Ticket = ({ ticket }) => {
 
   // ? instead of wrapping it in an if statement that checks if tickets.employeeTickets.length is === 0
   useEffect(() => {
-    const foundEmployee = employees.find(
-      (employee) => employee.id === ticket.employeeTickets[0]?.employeeId
-    );
-    setAssignedEmployee(foundEmployee);
-  }, [employees, ticket]);
+    if (employees.length && ticket?.employeeTickets?.length) {
+      const foundEmployee = employees.find(
+        (employee) => employee.id === ticket.employeeTickets[0]?.employeeId
+      );
+      setAssignedEmployee(foundEmployee || null);
+    }
+  }, [employees, ticket?.employeeTickets]);
 
   return (
     <section className="ticket">
@@ -35,6 +37,7 @@ export const Ticket = ({ ticket }) => {
           <div className="ticket-info">emergency</div>
           <div>{ticket.emergency ? "Yes" : "No"}</div>
         </div>
+        <div className="btn-container"></div>
       </footer>
     </section>
   );
